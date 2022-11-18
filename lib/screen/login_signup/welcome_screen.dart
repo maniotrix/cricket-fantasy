@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'registration_screen.dart';
 
-
 class Welcome_screen extends StatefulWidget {
   const Welcome_screen({Key? key}) : super(key: key);
 
@@ -16,11 +15,10 @@ class _Welcome_screenState extends State<Welcome_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          constraints: BoxConstraints.expand(),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("images/background1.jpg"),
-                fit: BoxFit.cover),
+        constraints: BoxConstraints.expand(),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("images/background1.jpg"), fit: BoxFit.cover),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -28,21 +26,19 @@ class _Welcome_screenState extends State<Welcome_screen> {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.fromLTRB(30, 10, 30, 0),
-              child: FlatButton(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
+              child: TextButton(
+                style: TextButtonStyle,
                 child: Text(
-                    'Register',
+                  'Register',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFF4C52FF),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>Registration_screen()));
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Registration_screen()));
                 },
               ),
             ),
@@ -71,8 +67,11 @@ class _Welcome_screenState extends State<Welcome_screen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onPressed: (){
-                      Navigator.push(context,MaterialPageRoute(builder: (context)=>Login_screen()));
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Login_screen()));
                     },
                   ),
                 ],

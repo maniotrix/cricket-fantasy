@@ -20,14 +20,21 @@ class Save_team extends StatefulWidget {
   final String team2;
   final String start_time;
 
-  Save_team({required this.batsmen,required this.bowlers,required this.allrounders,required this.wicketkeeper,required this.match_id,required this.team1,required this.team2,required this.start_time});
+  Save_team(
+      {required this.batsmen,
+      required this.bowlers,
+      required this.allrounders,
+      required this.wicketkeeper,
+      required this.match_id,
+      required this.team1,
+      required this.team2,
+      required this.start_time});
 
   @override
   State<Save_team> createState() => _Save_teamState();
 }
 
 class _Save_teamState extends State<Save_team> {
-
   Set_Data set_data = Set_Data();
 
   final _firestore = FirebaseFirestore.instance;
@@ -36,14 +43,17 @@ class _Save_teamState extends State<Save_team> {
   late List<String> w = List.filled(widget.wicketkeeper.length, 'wk');
   late List<String> bo = List.filled(widget.bowlers.length, 'ball');
   late List<String> al = List.filled(widget.allrounders.length, 'bat_ball');
-  late List<String> image = w+b+al+bo;
-  late List<String> players = widget.wicketkeeper+widget.batsmen+widget.allrounders+widget.bowlers;
+  late List<String> image = w + b + al + bo;
+  late List<String> players = widget.wicketkeeper +
+      widget.batsmen +
+      widget.allrounders +
+      widget.bowlers;
 
-  late List<bool> _color_vc = List.filled(11,false,growable: false);
-  late List<bool> _color_c = List.filled(11,false,growable: false);
+  late List<bool> _color_vc = List.filled(11, false, growable: false);
+  late List<bool> _color_c = List.filled(11, false, growable: false);
   String vc_name = '';
   String c_name = '';
-  final int a=1;
+  final int a = 1;
 
   final _auth = FirebaseAuth.instance;
   late String messageText;
@@ -54,8 +64,7 @@ class _Save_teamState extends State<Save_team> {
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         backgroundColor: Colors.blueAccent,
-        textColor: Colors.black
-    );
+        textColor: Colors.black);
   }
 
   @override
@@ -69,7 +78,8 @@ class _Save_teamState extends State<Save_team> {
           },
           icon: Icon(Icons.arrow_back),
         ),
-        title: Text('Your Fantasy Team',
+        title: Text(
+          'Your Fantasy Team',
           style: GoogleFonts.mcLaren(),
         ),
         centerTitle: true,
@@ -78,76 +88,76 @@ class _Save_teamState extends State<Save_team> {
         child: ListView.builder(
             itemCount: 11,
             scrollDirection: Axis.vertical,
-            itemBuilder: (context, index)
-            {
+            itemBuilder: (context, index) {
               return Column(
                 children: <Widget>[
                   Card(
                     child: ListTile(
-                      title: Text(players[index],
+                      title: Text(
+                        players[index],
                         style: GoogleFonts.mcLaren(),
                       ),
                       tileColor: Colors.white,
                       leading: CircleAvatar(
                         backgroundColor: Colors.white,
                         radius: 20,
-                        backgroundImage: AssetImage(
-                            'images/${image[index]}.jpg'),
+                        backgroundImage:
+                            AssetImage('images/${image[index]}.jpg'),
                       ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           GestureDetector(
-                            onTap: (){
-                              setState((){
-                                if(_color_vc.contains(true))
-                                {
-                                  if(vc_name==players[index])
-                                  {
+                            onTap: () {
+                              setState(() {
+                                if (_color_vc.contains(true)) {
+                                  if (vc_name == players[index]) {
                                     _color_vc[index] = !_color_vc[index];
                                     vc_name = '';
                                   }
-                                }
-                                else
-                                {
+                                } else {
                                   _color_vc[index] = !_color_vc[index];
                                   vc_name = players[index];
                                 }
                               });
                             },
                             child: CircleAvatar(
-                              backgroundColor: (_color_vc[index])?Colors.blueAccent:Colors.grey[300],
-                              child: Text('VC',
+                              backgroundColor: (_color_vc[index])
+                                  ? Colors.blueAccent
+                                  : Colors.grey[300],
+                              child: Text(
+                                'VC',
                                 style: GoogleFonts.mcLaren(
                                   color: Colors.black,
-                                ),),
+                                ),
+                              ),
                             ),
                           ),
-                          SizedBox(width:5),
+                          SizedBox(width: 5),
                           GestureDetector(
-                            onTap: (){
-                              setState((){
-                                if(_color_c.contains(true))
-                                {
-                                  if(c_name==players[index])
-                                  {
+                            onTap: () {
+                              setState(() {
+                                if (_color_c.contains(true)) {
+                                  if (c_name == players[index]) {
                                     _color_c[index] = !_color_c[index];
                                     c_name = '';
                                   }
-                                }
-                                else
-                                {
+                                } else {
                                   _color_c[index] = !_color_c[index];
                                   c_name = players[index];
                                 }
                               });
                             },
                             child: CircleAvatar(
-                              backgroundColor: (_color_c[index])?Colors.blueAccent:Colors.grey[300],
-                              child: Text('C',
+                              backgroundColor: (_color_c[index])
+                                  ? Colors.blueAccent
+                                  : Colors.grey[300],
+                              child: Text(
+                                'C',
                                 style: GoogleFonts.mcLaren(
                                   color: Colors.black,
-                                ),),
+                                ),
+                              ),
                             ),
                           ),
                         ],
@@ -156,35 +166,39 @@ class _Save_teamState extends State<Save_team> {
                   ),
                 ],
               );
-            }
-        ),
+            }),
       ),
       bottomNavigationBar: Container(
         height: 50,
-        child: FlatButton(
-          color: Colors.red,
-          onPressed: ()async{
-            if(vc_name==''||c_name=='')
-            {
+        child: TextButton(
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.red,
+          ),
+          onPressed: () async {
+            if (vc_name == '' || c_name == '') {
               showToast('Select Captain and Vice-Capatain');
-            }
-            else if(vc_name==c_name)
-            {
+            } else if (vc_name == c_name) {
               showToast('Captain and Vice-Captain cannot be same');
-            }
-            else
-            {
+            } else {
               String team_num = await set_data.get_team_num(widget.match_id);
-              await set_data.set_team_data(team_num,widget.match_id, players, c_name, vc_name, widget.wicketkeeper, widget.batsmen, widget.allrounders, widget.bowlers);
+              await set_data.set_team_data(
+                  team_num,
+                  widget.match_id,
+                  players,
+                  c_name,
+                  vc_name,
+                  widget.wicketkeeper,
+                  widget.batsmen,
+                  widget.allrounders,
+                  widget.bowlers);
               Navigator.pop(context);
               Navigator.pop(context);
             }
           },
-          child: Center(child: Text('Save Team',
-            style: GoogleFonts.mcLaren(
-                fontSize: 20,
-                color: Colors.white
-            ),
+          child: Center(
+              child: Text(
+            'Save Team',
+            style: GoogleFonts.mcLaren(fontSize: 20, color: Colors.white),
           )),
         ),
       ),

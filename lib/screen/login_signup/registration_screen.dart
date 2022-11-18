@@ -10,8 +10,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../home_screen/home_page.dart';
 
-
-
 class Registration_screen extends StatefulWidget {
   const Registration_screen({Key? key}) : super(key: key);
 
@@ -24,7 +22,7 @@ class _Registration_screenState extends State<Registration_screen> {
   late String email;
   late String name;
   late String phone;
-  final _auth =  FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   bool isloading = false;
 
@@ -34,8 +32,7 @@ class _Registration_screenState extends State<Registration_screen> {
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         backgroundColor: Colors.red,
-        textColor: Colors.black
-    );
+        textColor: Colors.black);
   }
 
   @override
@@ -48,7 +45,7 @@ class _Registration_screenState extends State<Registration_screen> {
             gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [Color(0xFF4C52FF),Colors.grey.shade600],
+              colors: [Color(0xFF4C52FF), Colors.grey.shade600],
             ),
           ),
           child: ConstrainedBox(
@@ -60,23 +57,23 @@ class _Registration_screenState extends State<Registration_screen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.fromLTRB(30,60,0,0),
-                  child: welcomeText(text: 'Let\'s Get Started',color: Colors.white,size: 40),
+                  padding: EdgeInsets.fromLTRB(30, 60, 0, 0),
+                  child: welcomeText(
+                      text: 'Let\'s Get Started',
+                      color: Colors.white,
+                      size: 40),
                 ),
-
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-
                     Container(
-                      padding: EdgeInsets.fromLTRB(30,30,30,10),
+                      padding: EdgeInsets.fromLTRB(30, 30, 30, 10),
                       child: TextField(
                         obscureText: false,
-                        style:TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
-
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person),
                           hintText: 'Full Name',
@@ -86,29 +83,27 @@ class _Registration_screenState extends State<Registration_screen> {
                             letterSpacing: 1,
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white, width: 1.0),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1.0),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white, width: 1.0),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1.0),
                           ),
                         ),
-                        onChanged: (value)
-                        {
+                        onChanged: (value) {
                           name = value;
                         },
                       ),
                     ),
-
-
                     Container(
-                      padding: EdgeInsets.fromLTRB(30,10,30,10),
+                      padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
                       child: TextField(
                         obscureText: false,
-                        style:TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
-
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email),
                           hintText: 'Email',
@@ -118,29 +113,28 @@ class _Registration_screenState extends State<Registration_screen> {
                             letterSpacing: 1,
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white, width: 1.0),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1.0),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white, width: 1.0),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1.0),
                           ),
                         ),
-                        onChanged: (value)
-                        {
+                        onChanged: (value) {
                           email = value;
                         },
                       ),
                     ),
-
                     Container(
-                      padding: EdgeInsets.fromLTRB(30,10,30,10),
+                      padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
                       child: TextField(
                         keyboardType: TextInputType.number,
                         obscureText: false,
-                        style:TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
-
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.phone),
                           hintText: 'Phone No.',
@@ -150,28 +144,27 @@ class _Registration_screenState extends State<Registration_screen> {
                             letterSpacing: 1,
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white, width: 1.0),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1.0),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white, width: 1.0),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1.0),
                           ),
                         ),
-                        onChanged: (value)
-                        {
+                        onChanged: (value) {
                           phone = value;
                         },
                       ),
                     ),
-
                     Container(
-                      padding: EdgeInsets.fromLTRB(30,10,30,30),
+                      padding: EdgeInsets.fromLTRB(30, 10, 30, 30),
                       child: TextField(
                         obscureText: true,
-                        style:TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
-
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.key),
                           hintText: 'Password',
@@ -181,14 +174,15 @@ class _Registration_screenState extends State<Registration_screen> {
                             letterSpacing: 1,
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white, width: 1.0),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1.0),
                           ),
                           focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white, width: 1.0),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1.0),
                           ),
                         ),
-                        onChanged: (value)
-                        {
+                        onChanged: (value) {
                           password = value;
                         },
                       ),
@@ -197,66 +191,80 @@ class _Registration_screenState extends State<Registration_screen> {
                       padding: EdgeInsets.fromLTRB(30, 20, 30, 30),
                       child: ButtonTheme(
                         height: 50,
-                        child: button(color: Color(0xFF5C52FF),widget:(isloading)? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Text('Loading...', style:TextStyle(color: Colors.white,fontSize:15),),
-                            SizedBox(width: 10,),
-                            CircularProgressIndicator(color: Colors.white,),
-                          ],
-                        ): Text(
-                          'Register',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                          onpressed: () async{
-                            if(email.isEmpty||name.isEmpty||phone.isEmpty||password.isEmpty){
-                              showToast("All fields are mandatory");
-                            }
-
-                            else {
-                                setState(() {
-                                  isloading = true;
-                                });
-                                Future.delayed(const Duration(seconds: 2), (){
-                                  setState(() {
-                                    isloading = false;
-                                  });
-                                });
-                                String message = await context.read<AuthService>().register(
-                                  email,
-                                  password,
-                                  name,
-                                  phone,
-                                );
-                                if(message=='signed up')
-                                {
-                                  Navigator.push(context,MaterialPageRoute(builder: (context)=>Home()));
-                                }
-                                else
-                                {
-                                  showDialog(
-                                    context: context,
-                                    builder: (ctx) => AlertDialog(
-                                      title:
-                                      Text(' Oops! Registeration Failed'),
-                                      content: Text(message,style:GoogleFonts.mcLaren()),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(ctx).pop();
-                                          },
-                                          child: Text('Okay'),
-                                        )
-                                      ],
+                        child: button(
+                          color: Color(0xFF5C52FF),
+                          widget: (isloading)
+                              ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Text(
+                                      'Loading...',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 15),
                                     ),
-                                  );
-                                }
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                )
+                              : Text(
+                                  'Register',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                          onpressed: () async {
+                            if (email.isEmpty ||
+                                name.isEmpty ||
+                                phone.isEmpty ||
+                                password.isEmpty) {
+                              showToast("All fields are mandatory");
+                            } else {
+                              setState(() {
+                                isloading = true;
+                              });
+                              Future.delayed(const Duration(seconds: 2), () {
+                                setState(() {
+                                  isloading = false;
+                                });
+                              });
+                              String message =
+                                  await context.read<AuthService>().register(
+                                        email,
+                                        password,
+                                        name,
+                                        phone,
+                                      );
+                              if (message == 'signed up') {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Home()));
+                              } else {
+                                showDialog(
+                                  context: context,
+                                  builder: (ctx) => AlertDialog(
+                                    title: Text(' Oops! Registeration Failed'),
+                                    content: Text(message,
+                                        style: GoogleFonts.mcLaren()),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(ctx).pop();
+                                        },
+                                        child: Text('Okay'),
+                                      )
+                                    ],
+                                  ),
+                                );
                               }
+                            }
                           },
                         ),
                       ),
@@ -264,7 +272,7 @@ class _Registration_screenState extends State<Registration_screen> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top:10),
+                  padding: EdgeInsets.only(top: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -288,8 +296,9 @@ class _Registration_screenState extends State<Registration_screen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        onPressed: (){
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>Login_screen()));
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Login_screen()));
                         },
                       ),
                     ],
@@ -304,13 +313,11 @@ class _Registration_screenState extends State<Registration_screen> {
   }
 }
 
-
 class welcomeText extends StatelessWidget {
-
   late String text;
   late Color color;
   late double size;
-  welcomeText({required this.text,required this.color,required this.size});
+  welcomeText({required this.text, required this.color, required this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -328,22 +335,18 @@ class welcomeText extends StatelessWidget {
 }
 
 class button extends StatelessWidget {
-
   late Widget widget;
   late VoidCallback onpressed;
   late Color color;
 
-  button({ required this.color,required this.widget,required this.onpressed});
+  button({required this.color, required this.widget, required this.onpressed});
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      color: color,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+    return TextButton(
+      style: TextButtonStyle,
       child: widget,
-      onPressed : onpressed,
+      onPressed: onpressed,
     );
   }
 }
