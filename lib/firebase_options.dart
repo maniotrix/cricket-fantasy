@@ -53,11 +53,10 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC5mmLrahwZeD75KyUIm4RcGmRh13G6i3s',
-    appId: '1:690819124338:android:046b301ae046aa773ec6eb',
-    messagingSenderId: '690819124338',
-    projectId: 'cricketfantasy-c3ae4',
-    databaseURL: 'https://cricketfantasy-c3ae4-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'cricketfantasy-c3ae4.appspot.com',
+    apiKey: 'AIzaSyD9-BfuuwkflF4rIulQCaXibVajHyJx4jI',
+    appId: '1:330700044455:android:eff6d5ff54e0b905984382',
+    messagingSenderId: '330700044455',
+    projectId: 'firecric-f14d8',
+    storageBucket: 'firecric-f14d8.appspot.com',
   );
 }

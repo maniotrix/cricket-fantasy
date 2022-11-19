@@ -18,7 +18,6 @@ class FirebaseWrapper {
   }
 }
 
-
 class GetUserName extends StatelessWidget {
   final String documentId;
 
@@ -32,17 +31,17 @@ class GetUserName extends StatelessWidget {
       future: users.doc(documentId).get(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-
         if (snapshot.hasError) {
           return Text("Something went wrong");
         }
 
         if (snapshot.hasData && !snapshot.data!.exists) {
-          return Text("Document does not exist");
+          return Text("Document does not exist2");
         }
 
         if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+          Map<String, dynamic> data =
+              snapshot.data!.data() as Map<String, dynamic>;
           return Text("Full Name: ${data['full_name']} ${data['last_name']}");
         }
 

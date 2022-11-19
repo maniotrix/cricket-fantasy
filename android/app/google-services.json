@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "690819124338",
-    "firebase_url": "https://cricketfantasy-c3ae4-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "cricketfantasy-c3ae4",
-    "storage_bucket": "cricketfantasy-c3ae4.appspot.com"
+    "project_number": "330700044455",
+    "project_id": "firecric-f14d8",
+    "storage_bucket": "firecric-f14d8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:690819124338:android:046b301ae046aa773ec6eb",
+        "mobilesdk_app_id": "1:330700044455:android:eff6d5ff54e0b905984382",
         "android_client_info": {
           "package_name": "com.example.win_fantasy11"
         }
       },
       "oauth_client": [
         {
-          "client_id": "690819124338-lu1ru9n9a95pq4rni6ui0qm5obakcft2.apps.googleusercontent.com",
+          "client_id": "330700044455-mfasov06klanv703cbcvujt7m26u3prf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC5mmLrahwZeD75KyUIm4RcGmRh13G6i3s"
+          "current_key": "AIzaSyD9-BfuuwkflF4rIulQCaXibVajHyJx4jI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "690819124338-lu1ru9n9a95pq4rni6ui0qm5obakcft2.apps.googleusercontent.com",
+              "client_id": "330700044455-mfasov06klanv703cbcvujt7m26u3prf.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "690819124338-k27rqvo3bavtm9ojs919d75gnno0367c.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.winFantasy11"
-              }
             }
           ]
         }
