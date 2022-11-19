@@ -18,7 +18,6 @@ class Feedback_form extends StatefulWidget {
 }
 
 class _Feedback_formState extends State<Feedback_form> {
-
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
 
@@ -30,8 +29,7 @@ class _Feedback_formState extends State<Feedback_form> {
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         backgroundColor: Colors.red,
-        textColor: Colors.black
-    );
+        textColor: Colors.black);
   }
 
   @override
@@ -45,7 +43,7 @@ class _Feedback_formState extends State<Feedback_form> {
             gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [Color(0xFF4C52FF),Colors.grey.shade600],
+              colors: [Color(0xFF4C52FF), Colors.grey.shade600],
             ),
           ),
           padding: EdgeInsets.all(20),
@@ -58,24 +56,27 @@ class _Feedback_formState extends State<Feedback_form> {
                   decoration: InputDecoration(
                     hintText: 'Please write your feedback....',
                     fillColor: Colors.grey[300],
-                    filled:true,
+                    filled: true,
                   ),
-                  onChanged: (value){
+                  onChanged: (value) {
                     message = value;
                   },
                 ),
               ),
-              SizedBox(height:10),
+              SizedBox(height: 10),
               Align(
                 alignment: Alignment.centerRight,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary:Colors.blueGrey,
+                    primary: Colors.blueGrey,
                   ),
-                  onPressed: () async{
-                    await _firestore.collection('Users').doc(_auth.currentUser?.uid).set({
-                      'Feedback':message,
-                    },SetOptions(merge: true)).then((value){});
+                  onPressed: () async {
+                    await _firestore
+                        .collection('users')
+                        .doc(_auth.currentUser?.uid)
+                        .set({
+                      'Feedback': message,
+                    }, SetOptions(merge: true)).then((value) {});
                     showToast('Feedback has been submitted');
                   },
                   child: Text('Submit'),

@@ -222,7 +222,7 @@ class _Match_contestState extends State<Match_contest> {
                                         child: Container(
                                           child: StreamBuilder<QuerySnapshot>(
                                               stream: _firestore
-                                                  .collection('Users')
+                                                  .collection('users')
                                                   .doc(_auth.currentUser?.uid)
                                                   .collection('Fantasy_Team')
                                                   .doc(widget.match_id)
@@ -277,7 +277,7 @@ class _Match_contestState extends State<Match_contest> {
                                                           DocumentReference
                                                               docRef =
                                                               _firestore.doc(
-                                                                  'Users/${_auth.currentUser?.uid}/Fantasy_Team/${widget.match_id}/Teams/${_auth.currentUser?.email} Team${(_color.indexWhere((element) => element == true)) + 1}');
+                                                                  'users/${_auth.currentUser?.uid}/Fantasy_Team/${widget.match_id}/Teams/${_auth.currentUser?.email} Team${(_color.indexWhere((element) => element == true)) + 1}');
                                                           await get_teams();
 
                                                           if (_color
@@ -294,7 +294,7 @@ class _Match_contestState extends State<Match_contest> {
                                                               setState(() {
                                                                 _firestore
                                                                     .collection(
-                                                                        'Users')
+                                                                        'users')
                                                                     .doc(_auth
                                                                         .currentUser
                                                                         ?.uid)

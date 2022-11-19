@@ -16,7 +16,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
 
@@ -25,7 +24,7 @@ class _ProfileState extends State<Profile> {
 
   Set_Data set = Set_Data();
 
-  late List user =[];
+  late List user = [];
 
   @override
   void initState() {
@@ -39,12 +38,10 @@ class _ProfileState extends State<Profile> {
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         backgroundColor: Colors.red,
-        textColor: Colors.black
-    );
+        textColor: Colors.black);
   }
 
-  void get_user() async
-  {
+  void get_user() async {
     user = await set.get_user_data();
     setState(() {});
   }
@@ -53,7 +50,10 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:Text('Profile',style: GoogleFonts.mcLaren(),),
+        title: Text(
+          'Profile',
+          style: GoogleFonts.mcLaren(),
+        ),
         centerTitle: true,
         backgroundColor: Color(0xFF4C52FF),
       ),
@@ -64,7 +64,7 @@ class _ProfileState extends State<Profile> {
             gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [Color(0xFF4C52FF),Colors.grey.shade600],
+              colors: [Color(0xFF4C52FF), Colors.grey.shade600],
             ),
           ),
           padding: EdgeInsets.all(20),
@@ -77,29 +77,32 @@ class _ProfileState extends State<Profile> {
                   backgroundImage: AssetImage('images/avatar.jpg'),
                 ),
               ),
-              SizedBox(height:30),
+              SizedBox(height: 30),
               Card(
                 child: ListTile(
-                  title: (user.length==0)?Text('Name'):Text(user[0]),
-                  leading: Icon(Icons.person,),
+                  title: (user.length == 0) ? Text('Name') : Text(user[0]),
+                  leading: Icon(
+                    Icons.person,
+                  ),
                   trailing: TextButton(
                     child: Text('Edit'),
-                    onPressed: (){
+                    onPressed: () {
                       showDialog(
                           context: context,
-                          builder: (context){
+                          builder: (context) {
                             return Dialog(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
                               elevation: 16,
                               child: Container(
                                 padding: EdgeInsets.all(5),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
-                                  children:<Widget>[
+                                  children: <Widget>[
                                     Center(
-                                      child:Text('Edit your name'),
+                                      child: Text('Edit your name'),
                                     ),
-                                    SizedBox(height:5),
+                                    SizedBox(height: 5),
                                     Container(
                                       child: TextField(
                                         cursorColor: Color(0xFF4C52FF),
@@ -107,19 +110,23 @@ class _ProfileState extends State<Profile> {
                                         decoration: InputDecoration(
                                           hintText: 'Write your name...',
                                           fillColor: Colors.grey[300],
-                                          filled:true,
+                                          filled: true,
                                         ),
-                                        onChanged: (value){
+                                        onChanged: (value) {
                                           name = value;
                                         },
                                       ),
                                     ),
-                                    SizedBox(height:5),
+                                    SizedBox(height: 5),
                                     ElevatedButton(
-                                      onPressed: () async{
-                                        await _firestore.collection('Users').doc(_auth.currentUser?.uid).set({
-                                          'name':name,
-                                        },SetOptions(merge: true)).then((value){});
+                                      onPressed: () async {
+                                        await _firestore
+                                            .collection('users')
+                                            .doc(_auth.currentUser?.uid)
+                                            .set({
+                                          'name': name,
+                                        }, SetOptions(merge: true)).then(
+                                                (value) {});
                                         showToast('Name has been changed');
                                         Navigator.pop(context);
                                       },
@@ -132,42 +139,44 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
                             );
-                          }
-                      );
+                          });
                     },
                   ),
                 ),
               ),
-              SizedBox(height:10),
+              SizedBox(height: 10),
               Card(
                 child: ListTile(
-                  title: Text(FirebaseAuth.instance.currentUser?.email ?? 'email'),
+                  title:
+                      Text(FirebaseAuth.instance.currentUser?.email ?? 'email'),
                   leading: Icon(Icons.email),
                 ),
               ),
-              SizedBox(height:10),
+              SizedBox(height: 10),
               Card(
                 child: ListTile(
-                  title: (user.length==0)?Text('0000000000'):Text(user[1]),
+                  title:
+                      (user.length == 0) ? Text('0000000000') : Text(user[1]),
                   leading: Icon(Icons.phone),
                   trailing: TextButton(
                     child: Text('Edit'),
-                    onPressed: (){
+                    onPressed: () {
                       showDialog(
                           context: context,
-                          builder: (context){
+                          builder: (context) {
                             return Dialog(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
                               elevation: 16,
                               child: Container(
                                 padding: EdgeInsets.all(5),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
-                                  children:<Widget>[
+                                  children: <Widget>[
                                     Center(
-                                      child:Text('Edit your Phone No.'),
+                                      child: Text('Edit your Phone No.'),
                                     ),
-                                    SizedBox(height:5),
+                                    SizedBox(height: 5),
                                     Container(
                                       child: TextField(
                                         cursorColor: Color(0xFF4C52FF),
@@ -175,19 +184,23 @@ class _ProfileState extends State<Profile> {
                                         decoration: InputDecoration(
                                           hintText: 'Write your phone no. ...',
                                           fillColor: Colors.grey[300],
-                                          filled:true,
+                                          filled: true,
                                         ),
-                                        onChanged: (value){
+                                        onChanged: (value) {
                                           phone = value;
                                         },
                                       ),
                                     ),
-                                    SizedBox(height:5),
+                                    SizedBox(height: 5),
                                     ElevatedButton(
-                                      onPressed: () async{
-                                        await _firestore.collection('Users').doc(_auth.currentUser?.uid).set({
-                                          'phone':phone,
-                                        },SetOptions(merge: true)).then((value){});
+                                      onPressed: () async {
+                                        await _firestore
+                                            .collection('users')
+                                            .doc(_auth.currentUser?.uid)
+                                            .set({
+                                          'phone': phone,
+                                        }, SetOptions(merge: true)).then(
+                                                (value) {});
                                         showToast('Phone No. has been changed');
                                         Navigator.pop(context);
                                       },
@@ -200,8 +213,7 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
                             );
-                          }
-                      );
+                          });
                     },
                   ),
                 ),

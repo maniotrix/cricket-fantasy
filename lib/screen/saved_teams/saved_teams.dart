@@ -20,7 +20,6 @@ class Saved_teams extends StatefulWidget {
 }
 
 class _Saved_teamsState extends State<Saved_teams> {
-
   void initState() {
     super.initState();
     get_points();
@@ -31,12 +30,15 @@ class _Saved_teamsState extends State<Saved_teams> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
 
-  CircularProgressIndicator indicator = CircularProgressIndicator(backgroundColor: Colors.grey,color: Colors.blueAccent,strokeWidth: 6,);
+  CircularProgressIndicator indicator = CircularProgressIndicator(
+    backgroundColor: Colors.grey,
+    color: Colors.blueAccent,
+    strokeWidth: 6,
+  );
 
-  Map<String,dynamic> points ={};
+  Map<String, dynamic> points = {};
 
-  Future get_points() async
-  {
+  Future get_points() async {
     points = await match_points.get_fantasy_points(widget.match_id);
     setState(() {});
   }
@@ -64,13 +66,16 @@ class _Saved_teamsState extends State<Saved_teams> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Color(0xFF4C52FF),Colors.grey.shade600],
+            colors: [Color(0xFF4C52FF), Colors.grey.shade600],
           ),
         ),
         child: StreamBuilder<QuerySnapshot>(
-            stream: _firestore.collection('Users').doc(_auth.currentUser?.uid)
-                .collection('Fantasy_Team').doc(widget.match_id).collection(
-                'Teams')
+            stream: _firestore
+                .collection('users')
+                .doc(_auth.currentUser?.uid)
+                .collection('Fantasy_Team')
+                .doc(widget.match_id)
+                .collection('Teams')
                 .snapshots(),
             builder: (BuildContext context, snapshot) {
               if (!snapshot.hasData) {
@@ -95,11 +100,11 @@ class _Saved_teamsState extends State<Saved_teams> {
                   captain: captain,
                   vice_captain: vice_captain,
                   value: value,
-                  total_points:total_points,
-                  points:points,
-                  team_num:team_num,
+                  total_points: total_points,
+                  points: points,
+                  team_num: team_num,
                   wicketkeepers: wicketkeepers,
-                  batsmen:batsmen,
+                  batsmen: batsmen,
                   allrounders: allrounders,
                   bowlers: bowlers,
                 );
@@ -110,27 +115,35 @@ class _Saved_teamsState extends State<Saved_teams> {
                 padding: EdgeInsets.all(10),
                 children: teams,
               );
-            }
-        ),
+            }),
       ),
     );
   }
 }
 
-
 class Team extends StatefulWidget {
   final String captain;
   final String vice_captain;
-  final List value;//players
-  late  double total_points;
-  final Map<String,dynamic> points;
+  final List value; //players
+  late double total_points;
+  final Map<String, dynamic> points;
   final int team_num;
   final List wicketkeepers;
   final List batsmen;
   final List allrounders;
   final List bowlers;
 
-  Team({required this.captain,required this.vice_captain,required this.value,required this.total_points,required this.points,required this.team_num,required this.wicketkeepers,required this.batsmen,required this.allrounders,required this.bowlers});
+  Team(
+      {required this.captain,
+      required this.vice_captain,
+      required this.value,
+      required this.total_points,
+      required this.points,
+      required this.team_num,
+      required this.wicketkeepers,
+      required this.batsmen,
+      required this.allrounders,
+      required this.bowlers});
 
   @override
   State<Team> createState() => _TeamState();
@@ -145,7 +158,7 @@ class _TeamState extends State<Team> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10), //border corner radius
-          boxShadow:[
+          boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5), //color of shadow
               spreadRadius: 5, //spread radius
@@ -156,19 +169,45 @@ class _TeamState extends State<Team> {
         ),
         padding: EdgeInsets.all(10),
         child: InkWell(
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder:(context)=>team_view(captain: widget.captain,vice_captain: widget.vice_captain,value: widget.value,points: widget.points,total_points: widget.total_points,wicketkeepers:widget.wicketkeepers,batsmen: widget.batsmen,allrounders: widget.allrounders,bowlers: widget.bowlers,)));
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => team_view(
+                          captain: widget.captain,
+                          vice_captain: widget.vice_captain,
+                          value: widget.value,
+                          points: widget.points,
+                          total_points: widget.total_points,
+                          wicketkeepers: widget.wicketkeepers,
+                          batsmen: widget.batsmen,
+                          allrounders: widget.allrounders,
+                          bowlers: widget.bowlers,
+                        )));
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text('Team ${widget.team_num}',
-                  style:GoogleFonts.mcLaren(
+                  style: GoogleFonts.mcLaren(
                     fontSize: 20,
                   )),
               IconButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder:(context)=>Saved_team_preview(value: widget.value, total_points: widget.total_points, points: widget.points, vice_captain: widget.vice_captain, captain: widget.captain,wicketkeepers:widget.wicketkeepers,batsmen: widget.batsmen,allrounders: widget.allrounders,bowlers: widget.bowlers,)));
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Saved_team_preview(
+                                value: widget.value,
+                                total_points: widget.total_points,
+                                points: widget.points,
+                                vice_captain: widget.vice_captain,
+                                captain: widget.captain,
+                                wicketkeepers: widget.wicketkeepers,
+                                batsmen: widget.batsmen,
+                                allrounders: widget.allrounders,
+                                bowlers: widget.bowlers,
+                              )));
                 },
                 icon: Icon(Icons.remove_red_eye),
               ),
@@ -179,10 +218,3 @@ class _TeamState extends State<Team> {
     );
   }
 }
-
-
-
-
-
-
-
